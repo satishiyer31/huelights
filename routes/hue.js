@@ -30,11 +30,11 @@ hue.get('/on',async(req,res)=> {
         .then(response=> response.json())
         .then(response => console.info(response))
 
-        res.json(200)
+        res.status(200).json("Success")
     }
     catch(error) {
         console.info(error)
-        res.json(500)
+        res.status(500).json("Error")
     }
 
 })
@@ -57,18 +57,18 @@ hue.get('/off',async(req,res)=> {
 
         const URL2= `http://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
-        await fetch(URL2, {
+        fetch(URL2, {
             method: "PUT",
             body: JSON.stringify({"on":false}),
 
         })
         .then(response=> response.json())
         .then(response => console.info(response))
-        res.json(200)
+        res.status(200).json("Success")
     }
     catch(error) {
         console.info(error);
-        res.json(500)
+        res.status(500).json("Error")
 
     }
 })
@@ -91,18 +91,18 @@ hue.get('/christmas',async(req,res)=> {
 
         const URL2= `http://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
-        await fetch(URL2, {
+        fetch(URL2, {
             method: "PUT",
             body: JSON.stringify({"on":true,"hue":21219,"sat":254,"bri":254 }),
 
         })
         .then(response=> response.json())
         .then(response => console.info(response))
-        res.status(200);
+        res.status(200).json("Success");
     }
     catch(error){
         console.info(error)
-        res.status(500);
+        res.status(500).json("Error");
     }
 })
 
