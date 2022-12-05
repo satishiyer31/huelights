@@ -1,10 +1,10 @@
 const hue = require('express').Router();
-const {HUB_IP, USERNAME} = process.env;
+const {HUB_IP, USERNAME, TOKEN} = process.env;
 const fetch = require('node-fetch');
 
 hue.get('/on',async(req,res)=> {
 
-    const URL = `http://${HUB_IP}/api/${USERNAME}/lights/2/state`
+    const URL = `https://${HUB_IP}/api/${USERNAME}/lights/2/state`
     try {
 
     
@@ -13,18 +13,28 @@ hue.get('/on',async(req,res)=> {
             body: JSON.stringify({"on":true,"bri": 254,
             "hue": 41191,
             "sat": 86,}),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+ TOKEN
+                
+            }
 
         })
         .then(response=> response.json())
         .then(response => console.info(response))
 
-        const URL2= `http://${HUB_IP}/api/${USERNAME}/lights/3/state`
+        const URL2= `https://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
         fetch(URL2, {
             method: "PUT",
             body: JSON.stringify({"on":true,"bri": 254,
             "hue": 41191,
             "sat": 86,}),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+ TOKEN
+                
+            }
 
         })
         .then(response=> response.json())
@@ -41,7 +51,7 @@ hue.get('/on',async(req,res)=> {
 
 hue.get('/off',async(req,res)=> {
 
-    const URL = `http://${HUB_IP}/api/${USERNAME}/lights/2/state`
+    const URL = `https://${HUB_IP}/api/${USERNAME}/lights/2/state`
 
     try {
 
@@ -49,17 +59,27 @@ hue.get('/off',async(req,res)=> {
         fetch(URL, {
             method: "PUT",
             body: JSON.stringify({"on":false}),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+ TOKEN
+                
+            }
 
         })
 
         .then(response=> response.json())
         .then(response => console.info(response))
 
-        const URL2= `http://${HUB_IP}/api/${USERNAME}/lights/3/state`
+        const URL2= `https://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
         fetch(URL2, {
             method: "PUT",
             body: JSON.stringify({"on":false}),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + TOKEN
+                
+            }
 
         })
         .then(response=> response.json())
@@ -75,7 +95,7 @@ hue.get('/off',async(req,res)=> {
 
 hue.get('/christmas',async(req,res)=> {
 
-    const URL = `http://${HUB_IP}/api/${USERNAME}/lights/2/state`
+    const URL = `https://${HUB_IP}/api/${USERNAME}/lights/2/state`
 
     try {
 
@@ -83,17 +103,27 @@ hue.get('/christmas',async(req,res)=> {
         fetch(URL, {
             method: "PUT",
             body: JSON.stringify({"on":true,"hue":65384,"sat":254,"bri":254 }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + TOKEN
+                
+            }
 
         })
 
         .then(response=> response.json())
         .then(response => console.info(response))
 
-        const URL2= `http://${HUB_IP}/api/${USERNAME}/lights/3/state`
+        const URL2= `https://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
         fetch(URL2, {
             method: "PUT",
             body: JSON.stringify({"on":true,"hue":21219,"sat":254,"bri":254 }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer '+ TOKEN
+                
+            }
 
         })
         .then(response=> response.json())
