@@ -1,6 +1,8 @@
 const hue = require('express').Router();
 const {HUB_IP, USERNAME, TOKEN} = process.env;
+const { response } = require('express');
 const fetch = require('node-fetch');
+
 
 hue.get('/on',async(req,res)=> {
 
@@ -22,6 +24,8 @@ hue.get('/on',async(req,res)=> {
         })
         .then(response=> response.json())
         .then(response => console.info(response))
+
+        
 
         const URL2= `https://${HUB_IP}/api/${USERNAME}/lights/3/state`
 
@@ -135,5 +139,11 @@ hue.get('/christmas',async(req,res)=> {
         res.status(500).json("Error");
     }
 })
+
+function getNewAccessToken(refreshToken) {
+
+
+
+}
 
 module.exports = hue;
